@@ -5,4 +5,4 @@
 ### 1.0: Subido la página x el projecto final
 ### 1.01: Re-armado la página y habilitada la página.
 
-### WEB: https://potrerodigital.github.io/Amancay-2020/
+### WEB:
