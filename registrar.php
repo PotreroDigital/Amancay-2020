@@ -27,9 +27,7 @@
 					<li><a href="inicio.php">Inicio</a></li>
 					<li><a href="quienessomos.html">Quienes somos</a></li>
           <li><a href="agradecimientos.html">Agradecimientos</a></li>
-					<!--IMPORTANT: THIS CONTENDS ITEMS IMPORTANTS FOR THIS PAGE!>
-					<li><a href="elements.html">Elements</a></li>
-					<-->
+					<li><a href="ingresar.php">Ingresar</a></li>
 				</ul>
 			</nav>
 
@@ -68,42 +66,27 @@
 										<div class="6u$ 12u$(xsmall)">
 											<input type="email" name="email" id="email" value="" placeholder= "<?php echo "Correo Electrónico"; ?>" />
 										</div>
-                    <div class="6u 12u$(xsmall)">
-											<input type="password" name="contrasena" id="name" value="" placeholder="<?php echo "Contraseña"; ?>" />
+										<div class="6u$ 12u$(xsmall)">
+											<input type="text" name="code" id="name" value="" placeholder= "<?PHP echo "Código";?>" />
 										</div>
                     <div class="3u$ 12u$(small)">
 											<input type="submit" value="<?php echo "Registrar"; ?>" class="fit" />
 										</div>
-										<!-- Break
-										<div class="12u$">
-											<div class="select-wrapper">
-												<select name="category" id="category">
-													<option value="">- Category -</option>
-													<option value="0">Administrador</option>
-													<option value="1">Usuario</option>
-												</select>
-											</div>
-										</div>
 									</div>
-                  -->
 								</form>
-
-								<hr />
+							<hr />
 			</div>
-
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="copyright">
 					&copy; Brian Rogers. Hecho en 2020. <strong>Todos los derechos reservados.</strong>
 				</div>
 			</footer>
-
 		<!-- Scripts -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.scrollex.min.js"></script>
     <script src="assets/js/skel.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-
 	</body>
 </html>

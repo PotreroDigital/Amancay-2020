@@ -53,32 +53,17 @@
     <div class='wrapper style2'>
       <section class='container'>
         <header class='major'>
-          <h2>Configurar cuentas de usuarios</h2>
+          <h2>Configuración</h2>
         </header>
-        <p>¡Bienvenido a la configuración de cuentas de usuario! </p>
-        <p>Por favor... ingrese el D.N.I y luego haz clic en <strong>Eliminar cuenta</strong> o apretá el botón <strong>modificar los datos</strong>.  </p>
-        <p>Si no estás seguro qué código y D.N.I deseas eliminar o modificar, haz clic en <strong>Ver tabla</strong>, verás una tabla donde ver los datos de cada cliente registrado.</p>
-        <form action="eliminar-admin.php" method="post">
+        <p>¡Bienvenido a la configuración! </p>
+        <p>Por favor... ingrese tu D.N.I y código de identificación y luego haz clic en <strong>Modificar cuenta</strong> para editar tus datos persaonales.  </p>
+        <p>Si estás seguro que deseas eliminar, haz clic en <strong>Eliminar cuenta</strong>, y todos tus datos se cerrarán y todo tus actividades también.</p>
+        <form action="eliminar-cuenta.php" method="post">
           <input type="text" name="dni" value="" placeholder="<?php  echo "Tu D.N.I";?>" size="8">
           <input type="text" name="code" value="" placeholder="<?php  echo "Tu código";?>" size="9">
           <input type="submit" name="submit" value="Eliminar cuenta">
-          <input type="submit" name="modificar" formaction="modificar-usuario.php" value="Modificar los datos">
+          <input type="submit" name="modificar" formaction="modificar-usuario.php" value="Modificar tus datos">
         </form>
-        <?php
-        session_start();
-        if ($_SESSION['rol'] =='admin') {
-          echo "
-          <form method='post'>
-            <input type='submit' formaction='tabla.php' name='table' class='button' value='Ver Tabla'>
-          </form>
-          ";
-        }elseif ($_SESSION['rol'] =='cliente') {
-          //Solo admin puede ver...
-        }else {
-          //no pasa nada.
-        }
-
-         ?>
       </section>
     </div>
       </div>

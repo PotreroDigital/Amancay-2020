@@ -18,6 +18,7 @@
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
+		<script src="js/system2.js"></script>
 		<noscript>
 			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/estilo1.css" />
@@ -47,17 +48,27 @@
 											<li><a href="agradecimientos.html">Agradecimientos</a></li>
 										</ul>
 									</li>
-									<li>
-										<a href="registrar.php">registrar</a>
+									<li><a href="registrar.php">Registrar</a></li>
+									<li><a href="ingresar.php">Ingresar</a></li>
 									</li>
 									<?php
-									echo"<li class='active'><a href='busqueda-pass.php'>Buscar</a></li>";
-									?>
+									session_start();
+									if (empty($_SESSION['rol'])) {
+										//no hace nada, los no ingresados no podran ver nada
+									}else {
+										if ($_SESSION['rol'] =='admin') {
+											echo "<li><a href='gazanias-comunes-perennes.php'>Catálogos</a>";
+											echo "<li><a href='cerrar.php'>Cerrar Sesión</a> </li>";
+										}elseif ($_SESSION['rol'] =='cliente') {
+											echo "<li><a href='configurar.php'>Configuración</a></li>";
+											echo "<li><a href='cerrar.php'>Cerrar Sesión</a> </li>";
+										}
+									}
+									 ?>
 								</ul>
 							</nav>
 					</div>
 				</div>
-
 			<!-- Banner -->
 				<div id="banner">
 					<section class="container">
@@ -68,21 +79,36 @@
 				</div>
 
 			</div>
-
 		<!-- Section One -->
 			<div class="wrapper style2">
 				<section class="container">
 					<div class="row double">
 						<div class="6u">
 							<header class="major">
-								<h2>¡Estas cosas ymás son un tema!</h2>
+								<h2>¡Estas cosas y más son un tema!</h2>
 								<span class="byline"> Flores de tono intenso, plantas que crecieron y se formaron como madres o árboles... Pero con esta página te contaremos lo más básico hasta las tendencias que pasa en buenos aires y en el mundo. ¡y estas son las que trabajamos mas! #Gazanias #Osteospermun #Alegríadelhogar #Eucalipto #Obconica #Albaca.</span>
 							</header>
 						</div>
 						<div class="6u">
 							<h3>Gazanias comunes y perenne</h3>
 							<p>¿Que son?, ¿Qué tipo de plantas o yuyo son?, ¿Cual es la diferencia entre comunes y perennes?, ¿Cuando es la estación ideal para sacar semillas? ¡Te contamos en la página siguiente!</p>
-							<a href="#" class="button">Sigue leyendo</a>
+							<?php
+							if (empty($_SESSION['rol'])) {
+							echo "
+							<a href='registrar.php' class='button'>Seguir leyendo</a>
+						";
+					}else {
+						if ($_SESSION['rol'] =='admin') {
+							echo "
+							<a href='gazanias-comunes-perennes.php' class='button'>Seguir leyendo</a>
+							";
+						}elseif ($_SESSION['rol'] =='cliente') {
+							echo "
+							<a href='gazanias-comunes-perennes.php' class='button'>Seguir leyendo</a>
+							";
+						}
+					}
+							 ?>
 						</div>
 					</div>
 				</section>
@@ -91,11 +117,35 @@
 		<!-- Section Two -->
 			<div class="wrapper style3">
 				<section class="container">
-					<header class="major">
+					<?php
+					if (empty($_SESSION['rol'])) {
+					echo "
+					<header class='major'>
 						<h2>¡Los ingresados disfrutan más!</h2>
 					</header>
 					<p>¿Por qué registrarse en esta página? Recibirás informes de cuidado, y cada semana compartimos las mejores sesiones de fotos de las plantas y destacamos su esplendor en primavera y verano. ¿Qué estás esperando?</p>
-					<a href="registrar.php" class="button alt">¡Registrate!</a>
+					<a href='registrar.php' class='button alt'>¡Registrate!</a>
+				";
+			}else {
+				if ($_SESSION['rol'] =='admin') {
+					echo "
+					<header class='major'>
+						<h2>¡Tenés el rol de administrador!</h2>
+					</header>
+					<p>El tener el rol de administrador es muy importante; puedes observar que hace los demás usuarios, como compartir, comentar o en general, todas sus actividades. Y por último, podés ver, editar o eliminar las cuentas de los clientes. Para hacerlo, haz clic en el botón <strong>Configurar cuentas (clientes)</strong>.</p>
+					<a href='busqueda-pass.php' class='button alt'>Configurar cuentas (clientes)</a>
+					";
+				}elseif ($_SESSION['rol'] =='cliente') {
+					echo "
+					<header class='major'>
+						<h2>¡Gracias por unirte a nuestra comunidad!</h2>
+					</header>
+					<p>Ahora, puedes ver nuestros informes semanales acerca de las plantas que producimos y sacar tus curiosidades. Para comenzar, haz clic en el botón <strong>Ver contenido</strong>.</p>
+					";
+					echo "<a href='contenido.php' class='button alt'>Ver contenido</a>";
+				}
+			}
+					 ?>
 				</section>
 			</div>
 
@@ -128,7 +178,7 @@
 					</header>
 					<div class="row">
 						<div class="3u">
-							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
+							<a href="#" class="image"><img src="images/franco.jpg" alt=""></a>
 							<h3>Franco fuentes</h3>
 							<p>¡Hermosas gazanias! ¡Un sendero de colores radiantes!</p>
 						</div>

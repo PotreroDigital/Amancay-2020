@@ -42,9 +42,6 @@
     <!-- Banner -->
       <div id="banner">
         <section class="container">
-          <!--h2>Amancay</h2>
-          <span>¡Sean bienvenidos!</span>
-          <p>Un sitio hermoso, donde encontrarás las plantas que más produzco y su info de como cuidarlas y ayudarlas a crecer</p-->
         </section>
       </div>
 
@@ -64,35 +61,73 @@ if ($conectar = mysqli_connect("127.0.0.1","root","")) {
   $nombre03 = $_POST['nombre'];
   $apellido03 = $_POST['apellido'];
   $edad03 = $_POST['edad'];
-  $contrasena = $_POST['contrasena'];
   $email03 = $_POST['email'];
-  if ($t = "SELECT contrasena FROM floricultura WHERE contrasena='$contrasena'") {
+  $code = $_POST['code'];
+  if ($t = "SELECT dni FROM floricultura WHERE dni=$dni03") {
     $registro = mysqli_query($conectar,$t);
     $verificacion = mysqli_fetch_array($registro);
-    if ($verificacion) {
-      echo "<div><p>¡Ya está en la base de datos!</p></div>";
+    if ($verificacion['dni']==$dni03 && $verificacion['codigodbarra']==$code) {
+      echo "<div><p>¡Ya está en la base de datos!</p></div>
+      <div class='wrapper style3'>
+        <section class='container'>
+          <header class='major'>
+            <h2>Aviso</h2>
+          </header>
+          <p>¡Ya está en la base de datos esa misma información!</p>
+          <p>¡O quizás el código de identificación que insertaste ya existe! Por favor, apretá 'Registrar' y vuelva a intentar.</p>
+          <a href='inicio.php' class='button alt'>Volver</a>
+          <a href='registrar.php' class='button alt'>Registrar</a>
+        </section>
+      </div>
+      ";
     }else {
       //3) Preparar orden al sql
-      $consulta = "INSERT INTO floricultura(id,dni,nombre,apellido,edad,contrasena,email) VALUES('','$dni03','$nombre03','$apellido03','$edad03','$contrasena','$email03')";
+      $consulta = "INSERT INTO floricultura(id,dni,nombre,apellido,edad,email,codigodbarra) VALUES('','$dni03','$nombre03','$apellido03','$edad03','$email03','$code')";
       //4)Ejecutar el orden
       if (mysqli_query($conectar,$consulta)) {
-        echo "<div><p>¡Registro agregado!</p></div>";
+        echo "
+        <div class='wrapper style3'>
+          <section class='container'>
+            <header class='major'>
+              <h2>¡Registro agregado!</h2>
+            </header>
+            <p>¡Ahora podrás disfrutar de nuestros conocimientos, y los lados más bellos de cada plantas que producimos!</p>
+            <a href='ingresar.php' class='button alt'>Iniciar sesión</a>
+            <a href='inicio.php' class='button alt'>Volver</a>
+          </section>
+        </div>
+        ";
       }else {
-        echo "<div><p>¡ERROR: No se agrego!</p></div>";
+        echo "
+        <div class='wrapper style3'>
+          <section class='container'>
+            <header class='major'>
+              <h2>¡Registro no agregado!</h2>
+            </header>
+            <p>¡No se pudo agregar la siguiente información! Por favor, vuelve a intentarlo más tarde.</p>
+            <a href='inicio.php' class='button alt'>Volver</a>
+          </section>
+        </div>
+        ";
       }
     }
   }
 }else { //De lo contrario general...
-  echo "<p class='' id=''>¡Mysql no se pudo reconocer tu nombre y la contraseña!</p>";
+  echo "
+  <div class='wrapper style3'>
+    <section class='container'>
+      <header class='major'>
+        <h2>¡Error!</h2>
+      </header>
+      <p>¡Mysql no se pudo reconocer tu nombre y la contraseña!</p>
+      <a href='inicio.php' class='button alt'>Volver</a>
+      <a href='registrar.php' class='button alt'>Registrar</a>
+    </section>
+  </div>
+  ";
 }
  ?>
       </section>
-      <form class="" action="" method="post">
-        <button type="input" name="button" formaction="ingresar.php">Iniciar sesión</button>
-      </form>
-      <form class="" action="" method="post">
-        <button type="input" name="button" formaction="inicio.php">Volver</button>
-      </form>
     </div>
   </div>
 </div>
